@@ -4,9 +4,14 @@ Tech Stack yang digunakan dalam aplikasi ini :
 - Nodejs 18.8.0
 - Database Mysql 8.0.30
 - PM2 (deployment)
-# Source Code
+- Docker (containerization)
+  
+# Deployment
 
-Berikut adalah panduan untuk source code pada aplikasi SiPupus :
+Berikut adalah panduan untuk deployment source code pada aplikasi SiPupus :
+
+## Install langsung pada OS
+
 1. Clone repo github SiPuspus :
 	
 ```bash
@@ -24,12 +29,38 @@ npm install
 	b. database.js : Koneksi database mysql
 	c. response.js : Formatting response json rest api
 	
-4. jalankan perintah pada terminal command line, untuk menjalankan program
+4. Cek pada file `database.js` sesuaikan dengan enviroment yang ada pada file tersebut ketika setup database.
+
+5. Jika dirasa sudah siap, jalankan perintah pada terminal command line, untuk testing program dalam enviroment development :
 	
 ```bash
 npm run dev
 ```
-	
+    
+5. Untuk menjalankan aplikasi dalam enviroment production, install dependency pm2 secara global :
+
+```bash
+npm install pm2 -g
+```
+
+6. Jalankan Aplikasi dengan pm2 
+
+```bash
+pm2 start index.js
+```
+## Menggunakan Docker Container
+
+1. Clone repo github SiPuspus :
+   
+```bash
+git clone https://github.com/AchmadMuafiTaufiqurrochman/expressjs-perpus.git
+```
+2. Buka terminal dan build aplikasi docker container dengan command :
+
+```bash
+docker compose up --build
+```
+
 # Setup Database 
 
 ## 1. Setup Database
@@ -180,6 +211,7 @@ SELECT * FROM peminjaman;
 
 - Pastikan MySQL sudah diinstal di sistem.
 - Jika terjadi kesalahan saat impor, pastikan file SQL tidak korup dan memiliki format yang benar.
+- Jika menggunakan docker container tidak perlu untuk membuat database dan impor file sql untuk migrasi dan seeding. Karena semua telah di setup secara otomatis oleh docker engine ketika container dijalankan.
 
 # Cara menggunakan API
 
